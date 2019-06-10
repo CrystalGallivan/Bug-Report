@@ -1,7 +1,7 @@
 <template>
   <div class="bug-report container">
     <div class="row">
-      <div class="col">
+      <div class="col" id="bug-detail">
         <div class="card text-center">
           <div class="card-header">
             <h6 v-if='bug.closed == false'>Open</h6>
@@ -11,7 +11,10 @@
             <h5 class="card-title">{{bug.title}}</h5>
             <p class="card-text">{{bug.description}}</p>
             <p class="card-text"><small class="text-muted">{{bug.creator}}</small></p>
-            <button type="button" @click="deleteBug()" class="btn btn-info btn-sm">Close</button>
+            <button type="button" @click="deleteBug(id)" class="btn btn-info btn-sm"
+              v-if="bug.closed == false">Close</button>
+            <button type="button" @click="deleteBug(id)" class="btn btn-info btn-sm"
+              v-else-if="bug.closed == true">Close</button>
           </div>
           <div class="card-footer text-muted">
             {{new Date(bug.createdAt).toLocaleDateString()}}
@@ -62,11 +65,9 @@
 
     },
     methods: {
-      selectBug(id) {
-        this.$store.dispatch('setBug', id);
-      },
+
       deleteBug(id) {
-        this.$store.dispatch('deleteBug', id)
+        this.$store.dispatch('deleteBug', this.$route.params.id)
       }
     },
     components: {
@@ -81,6 +82,7 @@
 
 
 <style>
-
-
+  #bug-detail {
+    margin-top: 200px;
+  }
 </style>

@@ -38,16 +38,17 @@ export default new Vuex.Store({
 
       try {
         let res = await _api.get('/bugs')
-        console.log(res.data)
+
         commit('setBugs', res.data.results)
       } catch (error) {
         console.log(error)
       }
     },
     async getBugById({ commit, dispatch }, id) {
+
       try {
         let res = await _api.get('/bugs/' + id)
-        console.log(res)
+
         commit('setBug', res.data.results)
       } catch (error) {
         console.log(error)
@@ -64,18 +65,20 @@ export default new Vuex.Store({
         console.log(error)
       }
     },
-    async deleteBug({ commit, dispatch }, id) {
+    async deleteBug({ commit, dispatch }, payload) {
+
       try {
-        let res = await _api.delete('/bugs/' + id)
-        dispatch('getBugById', id)
+        let res = await _api.delete('/bugs/' + payload)
+        dispatch('getBugById', payload)
       } catch (error) {
         console.log(error)
       }
     },
     async getAllNotes({ commit, dispatch }, payload) {
       try {
-        let res = await _api.get('/bugs/' + payload.bug + '/notes')
+        let res = await _api.get('/bugs/' + payload + '/notes')
         commit('setNotes', res.data.results)
+
       } catch (error) {
         console.log(error)
       }
@@ -83,7 +86,8 @@ export default new Vuex.Store({
     async createNote({ commit, dispatch }, payload) {
       try {
         let res = await _api.post('/bugs/' + payload.bug + '/notes', payload)
-        dispatch('getAllNotes', payload.bug)
+        dispatch('getAllNotes', res.data.results)
+        // payload.bugId
       } catch (error) {
         console.log(error)
       }

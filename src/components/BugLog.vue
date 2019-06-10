@@ -15,7 +15,7 @@
           </thead>
           <tbody>
             <tr @click="selectBug(bug)" v-for='bug in bugs' :key="bug._id">
-              <th scope="row">{{bug.title}}</th>
+              <th scope="row"><a class="page-link" id="bug-title" href="#">{{bug.title}}</a></th>
               <td>{{bug.creator}}</td>
               <td v-if="bug.closed == false" class="bg-info">Open</td>
               <td v-else-if="bug.closed == true" class="bg-danger">Closed</td>
@@ -60,7 +60,13 @@
 </script>
 
 
-<style>
+<style scoped>
+  th {
+    color: whitesmoke;
+  }
 
-
+  #bug-title {
+    background-color: rgba(33, 37, 41, 1);
+    color: whitesmoke;
+  }
 </style>
