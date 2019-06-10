@@ -24,7 +24,8 @@
     </div>
     <div class="row">
       <div class="col">
-        <note-form :bugId="this.id" />
+        <!-- CHECK WHEN BUILD IS FIXED -->
+        <note-form :bugId="this.id" v-if="bug.closed == false" />
       </div>
     </div>
     <div class="row">
