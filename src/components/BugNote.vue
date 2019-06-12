@@ -9,6 +9,7 @@
           <p>{{note.content}}</p>
           <footer class="blockquote-footer">{{note.creator}}</footer>
         </blockquote>
+        <button class="btn" @click='deleteNote'>Delete</button>
       </div>
     </div>
 
@@ -36,7 +37,9 @@
       }
     },
     methods: {
-
+      delete(id) {
+        this.$store.dispatch('deleteNote', id)
+      }
     }
   }
 

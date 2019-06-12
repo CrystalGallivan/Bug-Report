@@ -30,7 +30,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <bug-note />
+        <bug-note :id='bug.id' />
       </div>
     </div>
 

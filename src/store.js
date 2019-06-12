@@ -91,6 +91,17 @@ export default new Vuex.Store({
       } catch (error) {
         console.log(error)
       }
+    },
+    async deleteNote({ commit, dispatch }, payload) {
+      try {
+        let res = await _api.delete('/bugs/' + payload.bug + '/notes', payload)
+        commit('getAllNotes', res.data.results)
+        // may not need to reget all notes
+      } catch (error) {
+        console.error(error)
+
+      }
     }
   }
+
 })
