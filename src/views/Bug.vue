@@ -11,9 +11,9 @@
             <h5 class="card-title">{{bug.title}}</h5>
             <p class="card-text">{{bug.description}}</p>
             <p class="card-text"><small class="text-muted">{{bug.creator}}</small></p>
-            <button type="button" @click="deleteBug(id)" class="btn btn-info btn-sm"
+            <button type="button" @click="deleteBug()" class="btn btn-info btn-sm"
               v-if="bug.closed == false">Close</button>
-            <button type="button" @click="deleteBug(id)" class="btn btn-info btn-sm"
+            <button type="button" @click="deleteBug()" class="btn btn-info btn-sm"
               v-else-if="bug.closed == true">Close</button>
           </div>
           <div class="card-footer text-muted">
@@ -66,9 +66,9 @@
 
     },
     methods: {
-
-      deleteBug(id) {
-        this.$store.dispatch('deleteBug', this.$route.params.id)
+      deleteBug() {
+        let bugId = this.$route.params.id
+        this.$store.dispatch('deleteBug', bugId)
       }
     },
     components: {

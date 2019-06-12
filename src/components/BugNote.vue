@@ -9,7 +9,7 @@
           <p>{{note.content}}</p>
           <footer class="blockquote-footer">{{note.creator}}</footer>
         </blockquote>
-        <button class="btn" @click='deleteNote'>Delete</button>
+        <button class="btn btn-danger" type="button" @click='deleteNote(note)'>Delete</button>
       </div>
     </div>
 
@@ -23,6 +23,7 @@
 <script>
   export default {
     name: "BugNote",
+    props: ['note'],
     data() {
       return {
 
@@ -37,8 +38,9 @@
       }
     },
     methods: {
-      delete(id) {
-        this.$store.dispatch('deleteNote', id)
+      deleteNote(note) {
+        this.$store.dispatch('deleteNote', note)
+
       }
     }
   }

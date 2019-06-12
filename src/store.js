@@ -86,7 +86,7 @@ export default new Vuex.Store({
     async createNote({ commit, dispatch }, payload) {
       try {
         let res = await _api.post('/bugs/' + payload.bug + '/notes', payload)
-        dispatch('getAllNotes', res.data.results)
+        dispatch('getAllNotes', payload.bug)
         // payload.bugId
       } catch (error) {
         console.log(error)
@@ -94,8 +94,9 @@ export default new Vuex.Store({
     },
     async deleteNote({ commit, dispatch }, payload) {
       try {
-        let res = await _api.delete('/bugs/' + payload.bug + '/notes', payload)
-        commit('getAllNotes', res.data.results)
+
+        let res = await _api.delete('/bugs/' + payload.bug + '/notes/' + payload._id)
+        dispatch('getAllNotes', payload.bug)
         // may not need to reget all notes
       } catch (error) {
         console.error(error)
